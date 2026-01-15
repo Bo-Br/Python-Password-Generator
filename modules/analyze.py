@@ -7,7 +7,7 @@ numbers = ("2", "3", "4", "5", "6", "7", "8", "9")
 
 special_character = ("!", "#", "$", "%", "&", "*", "+", "-", "=", "?", "@", "^", "_")
 
-def analyse (password):
+def analyze (password):
     
     score = 5
     test_s = 0 
