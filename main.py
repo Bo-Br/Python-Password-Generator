@@ -1,4 +1,4 @@
-from modules import add, analyze, database_manager, generate, search, stat
+from modules.generate import generate_p
 
 
 def afficher_menu():
@@ -20,7 +20,24 @@ while True:
         
          
     if choix == "1":
-            generate()
+        length = int(input("Choose your password length: (8-64)"))
+        
+        print("Choose your password composition?")
+        num = int(input("Do you want numbers? (yes = 1, no = 0): "))
+        let = int(input("Do you want letters? (yes = 1, no = 0): "))
+        spe_c = int(input("Do you want special_characters? (yes = 1, no = 0): "))
+        
+        inp_psd = 0
+        
+        while inp_psd != 1:
+            
+            passwrd =  generate_p(length, num, let, spe_c)
+            inp_psd = int(input(f"Do you like the password : {passwrd} ? (1/0) : "))
+            if inp_psd == 1:
+                pass
+
+
+    """
     elif choix == "2":
             analyze()
     elif choix == "3":
@@ -35,3 +52,4 @@ while True:
          print("Goodbye!")
 else:
     print("Invalid option. Please choose between 1 and 7.")
+    """

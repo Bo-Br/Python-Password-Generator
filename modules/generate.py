@@ -22,12 +22,18 @@ score_password = {
 
 
 
-def generate (password_length):
+def generate_p (password_length, num, let, spe_c) :
     
+    pool = ()
     password = ""
-    pool = letters + numbers + special_character
-    
+    if num == 1:
+        pool += numbers
+    if let == 1: 
+        pool += letters
+    if spe_c == 1:
+        pool += special_character
     for i in range(0 , password_length): 
         password += str(secrets.choice(pool))
-    print(password)
     return password
+    
+
