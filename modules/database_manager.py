@@ -48,14 +48,15 @@ def db_add(Item):
         }
     }
     """
+
     db_copy = db_read()
     db_path = search_path()
 
-    db_max = max([int(num) for num in db_copy.keys()])
-    new_ID = str(db_max + 1)
+    db_max = max([int(num) for num in db_copy.keys()]) #Gives the maximum element in the keys list
+    new_ID = str(db_max + 1) #gives the new ID that goes after the greater ID
     db_copy[new_ID] = Item
     with open(db_path, "w") as fichier:
-        json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
+        json.dump(db_copy, fichier, indent = 4) #indent for better visibility
 
 
 def db_update(category : str, Item : dict, ID : str):
@@ -73,30 +74,24 @@ def db_update(category : str, Item : dict, ID : str):
     """
     db_copy = db_read()
     db_path = search_path()
-    db_copy[ID][category] = Item
+    db_copy[ID][category] = Item #Changes the Item in the category at the ID
     with open(db_path, "w") as fichier:
-        json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
+        json.dump(db_copy, fichier, indent = 4) #indent for better visibility
 
 
 def db_erase(ID):
+    """
+    Erase the ID element in the json file.
+    
+    :param ID: A str or int ID to erase in the database.
+    """
+    ID = str(ID) #Pour eviter les erreurs
     db_copy = db_read()
     db_path = search_path()
-    del db_copy[ID]
-    with open(db_path, "w") as fichier:
-        json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
+    if ID in db_copy:
+        del db_copy[ID]
+        with open(db_path, "w") as fichier:
+            json.dump(db_copy, fichier, indent = 4) #indent for better visibility
+    else: 
+        print(f"Error : ID-{ID} not in database")
 
-db_add({
-            "site": "data",
-            "categorie" : "data",
-            "email" : "data",
-            "mdp" : "data", 
-            "date_creation" : "data",
-            "score" : "data"
-        })
-
-print(db_read())
-
-db_erase("7")
-db_erase("8")
-
-print(db_read())
