@@ -1,4 +1,5 @@
-import json, os
+import json
+import os
 
 
 def search_path():
@@ -31,8 +32,6 @@ def db_read():
         data = json.load(fichier)
         return data
 
-######################################################################################################
-
 def db_add(Item):
     """
     Docstring for db_print
@@ -59,8 +58,7 @@ def db_add(Item):
         json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
 
 
-
-def db_update(category, Item, ID):
+def db_update(category : str, Item : dict, ID : str):
     """
     Docstring for db_print
     Add the item to the categoy in the database ID in the form of :
@@ -73,8 +71,32 @@ def db_update(category, Item, ID):
         }
     }
     """
+    db_copy = db_read()
     db_path = search_path()
-    database_copy = db_read()
-    database_copy[ID][category] = Item
+    db_copy[ID][category] = Item
+    with open(db_path, "w") as fichier:
+        json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
 
 
+def db_erase(ID):
+    db_copy = db_read()
+    db_path = search_path()
+    del db_copy[ID]
+    with open(db_path, "w") as fichier:
+        json.dump(db_copy, fichier, indent = 4) #indent sert a une meilleure lisibilité
+
+db_add({
+            "site": "data",
+            "categorie" : "data",
+            "email" : "data",
+            "mdp" : "data", 
+            "date_creation" : "data",
+            "score" : "data"
+        })
+
+print(db_read())
+
+db_erase("7")
+db_erase("8")
+
+print(db_read())
