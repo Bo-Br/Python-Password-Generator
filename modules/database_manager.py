@@ -146,7 +146,7 @@ def db_erase(ID):
     
     :param ID: A str or int ID to erase in the database.
     """
-    ID = str(ID) #Pour eviter les erreurs
+    ID = str(ID) #To avoid mistakes
     db_copy = db_read()
     db_path = search_path()
     
