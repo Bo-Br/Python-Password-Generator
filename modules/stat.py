@@ -1,4 +1,4 @@
-from database_manager import db_read
+from modules.database_manager import db_read
 from datetime import datetime, timedelta
 
 
@@ -90,8 +90,5 @@ def listing():
 
     except Exception as e:
         print(f"Unexpected error while listing database: {e}")
-
-
-stats()
 
 

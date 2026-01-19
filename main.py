@@ -1,8 +1,8 @@
 from modules.analyze import analyze
-from modules.database_manager import *  
+from modules.database_manager import db_add, db_erase, db_read, db_update
 from modules.generate import generate_p
 #from modules.search import search
-##from modules.stat import stats
+from modules.stat import stats, listing
 from datetime import date
 
 
@@ -34,7 +34,7 @@ while True:
                         except ValueError:
                                 print("Error: please enter a number between 8 and 64.")
 
-                print("Choose your password composition?")
+                print("\nChoose your password composition?")
 
                 while True:
                         try:
@@ -94,7 +94,7 @@ while True:
                    "categorie": categorie,
                    "email": email,
                    "mdp": mdp,
-                   "date_creation": date.today(),
+                   "date_creation": str(date.today()),
                    "score": analyze(mdp) }
             db_add(ID)
             
@@ -104,25 +104,26 @@ while True:
             
     elif choix == "4":
             print("\nList All Accounts")
-            db_list()
+            listing()
 
 
 
     elif choix == "5":
             print("\nSearch account")
-            print("Choose your password composition?")
-            name = int(input("\nSearch Website, Category, Email, Password: "))
-            search(name) 
+            name = int(input("\nSearch by : Website, Category, Email, Password: "))
+            #search(name) 
 
 
 
     elif choix == "6":
             print("\nView statistics")
-            db_statistics()
+            stats()
 
 
 
     elif choix == "7":
-         print("Goodbye!")
-else:
-    print("Invalid option. Please choose between 1 and 7.")
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid option. Please choose between 1 and 7.")
