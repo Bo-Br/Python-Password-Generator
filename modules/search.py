@@ -1,4 +1,4 @@
-from database_manager import db_read
+from .database_manager import db_read
 
 
 def db_print(db):
@@ -27,11 +27,13 @@ def search(category, name):
     db_copy = db_read()
     to_return = []
     for db_keys in db_copy.keys():
-        for i in db_keys:
-            if db_copy[i][category] == name:
-                to_return += [i]
+        if db_copy[db_keys][category] == name:
+            to_return += [db_keys]
     if not to_return:
         print("Error, please retry.")
         return None
     else:
         db_print({str(to_return[0]) : (db_copy[str(to_return[0])])})
+
+
+search("website", "cookie.io")

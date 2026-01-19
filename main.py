@@ -1,7 +1,7 @@
 from modules.analyze import analyze
 from modules.database_manager import db_add, db_erase, db_read, db_update
 from modules.generate import generate_p
-#from modules.search import search
+from modules.search import search
 from modules.stat import stats, listing
 from datetime import date
 
@@ -34,7 +34,7 @@ while True:
                         except ValueError:
                                 print("Error: please enter a number between 8 and 64.")
 
-                print("\nChoose your password composition?")
+                print("\nChoose your password composition")
 
                 while True:
                         try:
@@ -68,9 +68,17 @@ while True:
                 while inp_psd != 1:
                         passwrd = generate_p(length, num, let, spe_c)
                         try:
-                                inp_psd = int(input(f"\nDo you like the password : {passwrd} ? (1/0) : "))
+                                inp_psd = int(input(f"\nDo you want to save the password : {passwrd} ? (1/0) : "))
                                 if inp_psd not in (0, 1):
                                         raise ValueError
+                                else:
+                                       db_copy = db_read()
+                                       listing()
+                                       user_choice = str(input("Choose the ID of the site to put the password in :"))
+                                       if user_choice in db_copy.keys():
+                                              db_update("password", passwrd, user_choice)
+                                       else:
+                                              print("ID inexistant")
                         except ValueError:
                                 print("Error: please enter 1 or 0.")
 
@@ -85,16 +93,16 @@ while True:
     elif choix == "3":
             print("\nAdd a new account") 
             
-            site = input("\nWebsite name : ") 
-            categorie = input("\nCategory : ") 
-            email = input("\nEmail : ")
-            mdp = input("\nPassword : ")
+            site = input("\nWebsite name: ") 
+            categorie = input("\nCategory (mail, shop, social, other): ") 
+            username = input("\nUsername: ")
+            mdp = input("\nPassword: ")
             
-            ID = { "site": site, 
-                   "categorie": categorie,
-                   "email": email,
-                   "mdp": mdp,
-                   "date_creation": str(date.today()),
+            ID = { "website": site, 
+                   "category": categorie,
+                   "username": username,
+                   "password": mdp,
+                   "date_created": str(date.today()),
                    "score": analyze(mdp) }
             db_add(ID)
             
@@ -110,8 +118,14 @@ while True:
 
     elif choix == "5":
             print("\nSearch account")
-            name = int(input("\nSearch by : Website, Category, Email, Password: "))
-            #search(name) 
+            categories = ("website", "category", "username", "password")
+            category = ""
+            while category not in categories:
+                category = (input("\nSearch by : website, category, username, password: "))
+                name = (input(f"Enter the word to search in the {category} category: "))
+                if category not in categories:
+                       print("Category error, retry.")
+            search(category, name)
 
 
 
