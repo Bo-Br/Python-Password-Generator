@@ -4,79 +4,140 @@ import os
 
 def search_path():
     """
-    Searches the path of the database file and returns it
+    Returns the absolute path to the JSON database file.
+
+    The function determines the directory of the current file,
+    moves one level up to the project root, and builds the path
+    to 'database/DB.json'.
+
+    Returns:
+        str: Absolute path to the database file.
+
+    Raises:
+        FileNotFoundError: If the database directory or file does not exist.
     """
-    base_dir = os.path.dirname(os.path.abspath(__file__)) #takes the current directory name
-    project_dir = os.path.dirname(base_dir) #takes the previous directory name of base_dir
-    db_path = os.path.join(project_dir, "database", "DB.json") #finds the path to the .json database
-    return db_path
+    try:
+        base_dir = os.path.dirname(os.path.abspath(__file__))  # takes the current directory name
+        project_dir = os.path.dirname(base_dir)  # takes the previous directory name of base_dir
+        db_path = os.path.join(project_dir, "database", "DB.json")  # finds the path to the .json database
+        return db_path
+    
+    except Exception as e:
+        raise FileNotFoundError("Unable to determine database path") from e
+
 
 def db_read():
     """
-    Docstring for db_print
-    returns the database in the form of 
+    Reads and returns the content of the JSON database.
+
+    Expected database structure:
     {
-        "dataindex" : 
-        {
+        "dataindex": {
             "site": "data",
-            "categorie" : "data",
-            "email" : "data",
-            "mdp" : "data", 
-            "date_creation" : "data",
-            "score" : "data"
+            "categorie": "data",
+            "email": "data",
+            "mdp": "data",
+            "date_creation": "data",
+            "score": "data"
         }
     }
+
+    Returns:
+        dict: Parsed JSON content of the database.
+
+    Raises:
+        FileNotFoundError: If the database file cannot be found.
+        json.JSONDecodeError: If the database file contains invalid JSON.
+        IOError: If the file cannot be read.
     """
     db_path = search_path()
-    with open(db_path, "r") as fichier:
-        data = json.load(fichier)
-        return data
+    try:
+        with open(db_path, "r") as fichier:
+            data = json.load(fichier)
+            return data
+        
+    except FileNotFoundError:
+        raise FileNotFoundError("Database file not found")
+    
+    except json.JSONDecodeError:
+        raise ValueError("Database file contains invalid JSON")
+    
+    except Exception as e:
+        raise IOError("Error while reading the database") from e
+
 
 def db_add(Item):
     """
-    Docstring for db_print
-    Add the item to the database in the form of :
+    Adds a new item to the database with an auto-incremented ID.
+
+    Item structure:
     {
-        "ID" : 
-        {
-            "site": "data",
-            "categorie" : "data",
-            "email" : "data",
-            "mdp" : "data", 
-            "date_creation" : "data",
-            "score" : "data"
+        "site": "data",
+        "categorie": "data",
+        "email": "data",
+        "mdp": "data",
+        "date_creation": "data",
+        "score": "data"
+    }
+
+    Args:
+        Item (dict): Data to be added to the database.
+
+    Raises:
+        ValueError: If database IDs are not numeric.
+        IOError: If the database file cannot be written.
+    """
+    try:
+        db_copy = db_read()
+        db_path = search_path()
+
+        db_max = max([int(num) for num in db_copy.keys()])  # Gives the maximum element in the keys list
+        new_ID = str(db_max + 1)  # gives the new ID that goes after the greater ID
+        db_copy[new_ID] = Item
+
+        with open(db_path, "w") as fichier:
+            json.dump(db_copy, fichier, indent=4)  # indent for better visibility
+
+    except ValueError:
+        raise ValueError("Database keys must be numeric strings")
+    
+    except Exception as e:
+        raise IOError("Error while adding data to the database") from e
+
+
+def db_update(category: str, Item: dict, ID: str):
+    """
+    Updates a specific category of an existing database entry.
+
+    Update format:
+    {
+        "ID": {
+            "category": "data"
         }
     }
+
+    Args:
+        category (str): The category to update.
+        Item (dict): New data to assign to the category.
+        ID (str): Database entry ID.
+
+    Raises:
+        KeyError: If the ID or category does not exist.
+        IOError: If the database file cannot be written.
     """
+    try:
+        db_copy = db_read()
+        db_path = search_path()
 
-    db_copy = db_read()
-    db_path = search_path()
+        db_copy[ID][category] = Item  # Changes the Item in the category at the ID
 
-    db_max = max([int(num) for num in db_copy.keys()]) #Gives the maximum element in the keys list
-    new_ID = str(db_max + 1) #gives the new ID that goes after the greater ID
-    db_copy[new_ID] = Item
-    with open(db_path, "w") as fichier:
-        json.dump(db_copy, fichier, indent = 4) #indent for better visibility
-
-
-def db_update(category : str, Item : dict, ID : str):
-    """
-    Docstring for db_print
-    Add the item to the categoy in the database ID in the form of :
-    {
-        "ID" : 
-        {
-            
-            "category" : "data"
-
-        }
-    }
-    """
-    db_copy = db_read()
-    db_path = search_path()
-    db_copy[ID][category] = Item #Changes the Item in the category at the ID
-    with open(db_path, "w") as fichier:
-        json.dump(db_copy, fichier, indent = 4) #indent for better visibility
+        with open(db_path, "w") as fichier:
+            json.dump(db_copy, fichier, indent=4)  # indent for better visibility
+    except KeyError:
+        raise KeyError("Invalid ID or category")
+    
+    except Exception as e:
+        raise IOError("Error while updating the database") from e
 
 
 def db_erase(ID):
@@ -88,10 +149,10 @@ def db_erase(ID):
     ID = str(ID) #Pour eviter les erreurs
     db_copy = db_read()
     db_path = search_path()
+    
     if ID in db_copy:
         del db_copy[ID]
         with open(db_path, "w") as fichier:
             json.dump(db_copy, fichier, indent = 4) #indent for better visibility
     else: 
         print(f"Error : ID-{ID} not in database")
-
