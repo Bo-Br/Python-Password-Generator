@@ -1,7 +1,9 @@
 from modules.analyze import analyze
 from modules.database_manager import *  
 from modules.generate import generate_p
-from datetime import datetime
+#from modules.search import search
+##from modules.stat import stats
+from datetime import date
 
 
 def afficher_menu():
@@ -23,25 +25,61 @@ while True:
         
          
     if choix == "1":
-        length = int(input("\nChoose your password length: (8-64)"))
-        
-        print("Choose your password composition?")
-        num = int(input("\nDo you want numbers? (yes = 1, no = 0): "))
-        let = int(input("\nDo you want letters? (yes = 1, no = 0): "))
-        spe_c = int(input("\nDo you want special_characters? (yes = 1, no = 0): "))
-        
-        inp_psd = 0
-        
-        while inp_psd != 1:
-            
-            passwrd =  generate_p(length, num, let, spe_c)
-            inp_psd = int(input(f"\nDo you like the password : {passwrd} ? (1/0) : "))
-            if inp_psd == 1:
-                pass
+                while True:
+                        try:
+                                length = int(input("\nChoose your password length: (8-64)"))
+                                if length < 8 or length > 64:
+                                        raise ValueError
+                                break
+                        except ValueError:
+                                print("Error: please enter a number between 8 and 64.")
+
+                print("Choose your password composition?")
+
+                while True:
+                        try:
+                                num = int(input("\nDo you want numbers? (yes = 1, no = 0): "))
+                                if num not in (0, 1):
+                                        raise ValueError
+                                break
+                        except ValueError:
+                                print("Error: please enter 1 or 0.")
+
+                while True:
+                        try:
+                                let = int(input("\nDo you want letters? (yes = 1, no = 0): "))
+                                if let not in (0, 1):
+                                        raise ValueError
+                                break
+                        except ValueError:
+                                print("Error: please enter 1 or 0.")
+
+                while True:
+                        try:
+                                spe_c = int(input("\nDo you want special_characters? (yes = 1, no = 0): "))
+                                if spe_c not in (0, 1):
+                                        raise ValueError
+                                break
+                        except ValueError:
+                                print("Error: please enter 1 or 0.")
+
+                inp_psd = 0
+
+                while inp_psd != 1:
+                        passwrd = generate_p(length, num, let, spe_c)
+                        try:
+                                inp_psd = int(input(f"\nDo you like the password : {passwrd} ? (1/0) : "))
+                                if inp_psd not in (0, 1):
+                                        raise ValueError
+                        except ValueError:
+                                print("Error: please enter 1 or 0.")
 
 
     elif choix == "2":
-            analyze()
+            print("\n Analyze your password: ")
+            mdp = input("\n Enter your password: ")
+            print(f"The score of your password is: {analyze(mdp)}")
+            
             
             
     elif choix == "3":
@@ -56,19 +94,34 @@ while True:
                    "categorie": categorie,
                    "email": email,
                    "mdp": mdp,
-                   "date_creation": datetime.now(),
+                   "date_creation": date.today(),
                    "score": analyze(mdp) }
             db_add(ID)
             
             print("\nAccount successfully added!\n")
+
             
             
     elif choix == "4":
+            print("\nList All Accounts")
             db_list()
+
+
+
     elif choix == "5":
-            dn_research()
+            print("\nSearch account")
+            print("Choose your password composition?")
+            name = int(input("\nSearch Website, Category, Email, Password: "))
+            search(name) 
+
+
+
     elif choix == "6":
+            print("\nView statistics")
             db_statistics()
+
+
+
     elif choix == "7":
          print("Goodbye!")
 else:
