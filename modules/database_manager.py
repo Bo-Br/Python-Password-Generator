@@ -43,7 +43,7 @@ def db_read():
     }
 
     Returns:
-        dict: Parsed JSON content of the database.
+        dict: JSON content of the database.
 
     Raises:
         FileNotFoundError: If the database file cannot be found.
