@@ -1,6 +1,6 @@
-from modules.database_manager import db_read
+from database_manager import db_read
 from datetime import datetime, timedelta
-
+from search import db_print
 
 def stats():
     """
@@ -83,12 +83,15 @@ def listing():
     """
     try:
         database_1 = db_read()
-        for db_id in database_1.keys():
-            print(f"{db_id} : ")
-            for db_key, db_value in database_1[db_id].items():
-                print(f"{db_key} : {db_value}")
+        db_print(database_1)
 
     except Exception as e:
         print(f"Unexpected error while listing database: {e}")
+
+
+
+
+
+
 
 
