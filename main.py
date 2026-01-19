@@ -34,7 +34,7 @@ while True:
                         except ValueError:
                                 print("Error: please enter a number between 8 and 64.")
 
-                print("Choose your password composition?")
+                print("\nChoose your password composition?")
 
                 while True:
                         try:
