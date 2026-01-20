@@ -3,8 +3,32 @@
         "website": "websiteExample",
         "category": "categoryExample",
         "username": "usernameExample",
-        "password": "passwordExample",
-        "date_created": "2025-01-01",
+        "password": "Qxmo63bJBu=y",
+        "date_created": "2026-01-20",
         "score": 4
+    },
+    "2": {
+        "website": "aze",
+        "category": "aze",
+        "username": "aze",
+        "password": "aze",
+        "date_created": "2026-01-20",
+        "score": 0
+    },
+    "3": {
+        "website": "qsd",
+        "category": "qsd",
+        "username": "qsd",
+        "password": "qsd",
+        "date_created": "2026-01-20",
+        "score": 0
+    },
+    "4": {
+        "website": "aze",
+        "category": "aze",
+        "username": "aze",
+        "password": "aze",
+        "date_created": "2026-01-20",
+        "score": 0
     }
 }
