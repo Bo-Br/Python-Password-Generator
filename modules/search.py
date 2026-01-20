@@ -35,5 +35,3 @@ def search(category, name):
     else:
         db_print({str(to_return[0]) : (db_copy[str(to_return[0])])})
 
-
-search("website", "cookie.io")

@@ -12,10 +12,11 @@ def afficher_menu():
     print("\n 1. Generate Password")
     print("\n 2. Analyze Password")
     print("\n 3. Add Account")
-    print("\n 4. List All Accounts")
-    print("\n 5. Search Account")
-    print("\n 6. Statistics ")
-    print("\n 7. Exit Program")
+    print("\n 4. Delete Account")
+    print("\n 5. List All Accounts")
+    print("\n 6. Search Account")
+    print("\n 7. Statistics ")
+    print("\n 8. Exit Program")
     print("\n =========================== \n")
 
 
@@ -63,22 +64,30 @@ while True:
                         except ValueError:
                                 print("Error: please enter 1 or 0.")
 
+                
                 inp_psd = 0
-
                 while inp_psd != 1:
                         passwrd = generate_p(length, num, let, spe_c)
                         try:
                                 inp_psd = int(input(f"\nDo you want to save the password : {passwrd} ? (1/0) : "))
-                                if inp_psd not in (0, 1):
-                                        raise ValueError
-                                else:
+                                if inp_psd == 1:
                                        db_copy = db_read()
                                        listing()
                                        user_choice = str(input("Choose the ID of the site to put the password in :"))
                                        if user_choice in db_copy.keys():
                                               db_update("password", passwrd, user_choice)
+                                              db_update("date_created", str(date.today()), user_choice)
                                        else:
                                               print("ID inexistant")
+
+                                elif inp_psd not in (0, 1):
+                                        raise ValueError
+                                
+                                elif inp_psd == 0:
+                                       break
+                                
+                                
+                                
                         except ValueError:
                                 print("Error: please enter 1 or 0.")
 
@@ -108,15 +117,18 @@ while True:
             
             print("\nAccount successfully added!\n")
 
+    elif choix == "4":   
+           listing()
+           id_to_erase = input("\nChoose an ID to erase: ")
+           db_erase(id_to_erase)  
             
-            
-    elif choix == "4":
+    elif choix == "5":
             print("\nList All Accounts")
             listing()
 
 
 
-    elif choix == "5":
+    elif choix == "6":
             print("\nSearch account")
             categories = ("website", "category", "username", "password")
             category = ""
@@ -129,15 +141,15 @@ while True:
 
 
 
-    elif choix == "6":
+    elif choix == "7":
             print("\nView statistics")
             stats()
 
 
 
-    elif choix == "7":
+    elif choix == "8":
         print("Goodbye!")
         break
 
     else:
-        print("Invalid option. Please choose between 1 and 7.")
+        print("Invalid option. Please choose between 1 and 8.")
