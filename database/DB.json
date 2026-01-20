@@ -1,74 +1,10 @@
 {
     "1": {
-        "website": "gmail.com",
-        "category": "mail",
-        "username": "user@example.com",
-        "password": "password123",
+        "website": "websiteExample",
+        "category": "categoryExample",
+        "username": "usernameExample",
+        "password": "passwordExample",
         "date_created": "2025-01-01",
         "score": 4
-    },
-    "2": {
-        "website": "github.com",
-        "category": "other",
-        "username": "devuser@github.com",
-        "password": "BfLpo2bAYBXS",
-        "date_created": "2026-01-20",
-        "score": 5
-    },
-    "3": {
-        "website": "amazon.com",
-        "category": "shop",
-        "username": "buyer@amazon.com",
-        "password": "buyStuff42",
-        "date_created": "2023-06-02",
-        "score": 3
-    },
-    "4": {
-        "website": "netflix.com",
-        "category": "other",
-        "username": "watcher@netflix.com",
-        "password": "%BxYKMqygpMN",
-        "date_created": "2026-01-20",
-        "score": 2
-    },
-    "5": {
-        "website": "bank-example.com",
-        "category": "other",
-        "username": "secure@bank.com",
-        "password": "mxSpLpU?5",
-        "date_created": "2021-09-25",
-        "score": 5
-    },
-    "6": {
-        "website": "discord.com",
-        "category": "social",
-        "username": "user@discord.com",
-        "password": "discordPass321",
-        "date_created": "2024-03-14",
-        "score": 4
-    },
-    "7": {
-        "website": "cookie.io",
-        "category": "other",
-        "username": "theBestCookie",
-        "password": "ksjgnoern3",
-        "date_created": "2026-01-19",
-        "score": 2
-    },
-    "8": {
-        "website": "paint.com",
-        "category": "other",
-        "username": "austrianPainter",
-        "password": "DeeLV^sWto&o",
-        "date_created": "2026-01-20",
-        "score": 0
-    },
-    "9": {
-        "website": "paint.com",
-        "category": "other",
-        "username": "austrianPainter",
-        "password": "DeeLV^sWto&o",
-        "date_created": "2026-01-20",
-        "score": 0
     }
 }
