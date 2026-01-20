@@ -96,7 +96,7 @@ def db_add(Item):
         db_copy[new_ID] = Item
 
         with open(db_path, "w") as fichier:
-            json.dump(db_copy, fichier, indent=4)  # indent for better visibility
+            json.dump(db_copy, fichier, indent = 4)  # indent for better visibility
 
     except ValueError:
         raise ValueError("Database keys must be numeric strings")
@@ -132,7 +132,7 @@ def db_update(category: str, Item: dict, ID: str):
         db_copy[ID][category] = Item  # Changes the Item in the category at the ID
 
         with open(db_path, "w") as fichier:
-            json.dump(db_copy, fichier, indent=4)  # indent for better visibility
+            json.dump(db_copy, fichier, indent = 4)  # indent for better visibility
     except KeyError:
         raise KeyError("Invalid ID or category")
     

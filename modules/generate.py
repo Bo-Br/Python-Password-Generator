@@ -22,7 +22,7 @@ score_password = {
 
 
 
-def generate_p (password_length, num, let, spe_c) :
+def generate_p (password_length, num, let, spe_c):
     
     pool = ()
     password = ""
