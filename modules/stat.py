@@ -1,6 +1,6 @@
-from database_manager import db_read
+from .database_manager import db_read
 from datetime import datetime, timedelta
-from search import db_print
+from .search import db_print
 
 def stats():
     """
@@ -38,7 +38,7 @@ def stats():
         for i in database.values():
             database_score += int(i["score"])
 
-            creation_date = datetime.strptime(i["date_creation"], "%Y-%m-%d")
+            creation_date = datetime.strptime(i["date_created"], "%Y-%m-%d")
             if creation_date < old_limit:
                 old_passwords.append(i["site"])
 

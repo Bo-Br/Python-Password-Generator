@@ -33,12 +33,12 @@ def db_read():
     Expected database structure:
     {
         "dataindex": {
-            "site": "data",
-            "categorie": "data",
-            "email": "data",
-            "mdp": "data",
-            "date_creation": "data",
-            "score": "data"
+        "site": "github.com",
+        "category": "other",
+        "email": "devuser@github.com",
+        "password": "gh_pass_789",
+        "date_created": "2024-11-18",
+        "score": 5
         }
     }
 
@@ -72,12 +72,12 @@ def db_add(Item):
 
     Item structure:
     {
-        "site": "data",
-        "categorie": "data",
-        "email": "data",
-        "mdp": "data",
-        "date_creation": "data",
-        "score": "data"
+        "site": "github.com",
+        "category": "other",
+        "email": "devuser@github.com",
+        "password": "gh_pass_789",
+        "date_created": "2024-11-18",
+        "score": 5
     }
 
     Args:
