@@ -29,7 +29,7 @@ def analyze (password):
         score = score - 2
         
     if test_l == 0:
-        score = score -2
+        score = score - 2
     
     if test_s == 0:
         score = score - 1

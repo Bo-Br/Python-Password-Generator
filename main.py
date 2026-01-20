@@ -1,7 +1,7 @@
 from modules.analyze import analyze
 from modules.database_manager import db_add, db_erase, db_read, db_update
 from modules.generate import generate_p
-#from modules.search import search
+from modules.search import search
 from modules.stat import stats, listing
 from datetime import date
 
@@ -68,7 +68,7 @@ while True:
                 while inp_psd != 1:
                         passwrd = generate_p(length, num, let, spe_c)
                         try:
-                                inp_psd = int(input(f"\nDo you like the password : {passwrd} ? (1/0) : "))
+                                inp_psd = int(input(f"\nDo you like the password : {passwrd} ? (yes = 1, no = 0) : "))
                                 if inp_psd not in (0, 1):
                                         raise ValueError
                         except ValueError:
