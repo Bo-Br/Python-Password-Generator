@@ -8,7 +8,23 @@ numbers = ("2", "3", "4", "5", "6", "7", "8", "9")
 special_character = ("!", "#", "$", "%", "&", "*", "+", "-", "=", "?", "@", "^", "_")
 
 def analyze (password):
-    
+    """
+    Analyzes the strength of a password and returns a score.
+
+    This function evaluates a password based on its length and
+    the presence of letters, numbers, and special characters.
+    A numerical score is calculated to represent the password's
+    overall strength.
+
+    Args:
+        password: The password string to be analyzed.
+
+    Returns:
+        An integer score representing the strength of the password.
+
+    Raises:
+        None
+    """
     score = 5
     test_s = 0 
     test_l = 0

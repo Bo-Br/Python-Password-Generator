@@ -23,7 +23,25 @@ score_password = {
 
 
 def generate_p (password_length, num, let, spe_c):
-    
+    """
+    Generates a random password based on selected criteria.
+
+    This function builds a pool of characters depending on the
+    user's choices (numbers, letters, special characters) and
+    generates a random password of the specified length.
+
+    Args:
+        password_length: The desired length of the generated password.
+        num: Indicates whether numbers are included (1 = yes, 0 = no).
+        let: Indicates whether letters are included (1 = yes, 0 = no).
+        spe_c: Indicates whether special characters are included (1 = yes, 0 = no).
+
+    Returns:
+        A randomly generated password as a string.
+
+    Raises:
+        IndexError: If no character type is selected and the pool is empty.
+    """
     pool = ()
     password = ""
     if num == 1:

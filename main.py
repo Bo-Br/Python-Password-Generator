@@ -9,6 +9,21 @@ from modules.stat import stats, listing
 
 
 def afficher_menu():
+    """Displays the main program menu.
+
+    This function prints to the console all available options
+    of the password manager, including password generation,
+    analysis, account management, and statistics.
+
+    Args:
+        None
+
+    Returns:
+        None
+
+    Raises:
+        None
+    """
     print("\n            MENU: ")
     print(" =========================== ")
     print("\n 1. Generate Password")
@@ -20,6 +35,7 @@ def afficher_menu():
     print("\n 7. Statistics ")
     print("\n 8. Exit Program")
     print("\n =========================== \n")
+
 
 
 while True:
